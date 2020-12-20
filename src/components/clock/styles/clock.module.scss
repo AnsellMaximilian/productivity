@@ -1,0 +1,123 @@
+$glare: 5px 5px 5px rgba(255, 255, 255, 0.507) inset;
+
+.clock {
+    width: 400px;
+    max-width: 100%;
+    margin: 20px auto;
+    border: 5px solid black;
+    border-radius: 10px;
+    background-color: rgb(100, 100, 100);
+    padding: 10px;
+    box-shadow: 5px 5px 5px gray, 5px 5px 5px rgb(80, 80, 80) inset;
+    // font-size: 1.5rem;
+}
+
+.display {
+    background-color: black;
+    box-shadow: $glare;
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: inherit;
+    font-size: 2rem;
+    position: relative;
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: center;
+}
+
+.display__label {
+    font-size: 1rem;
+}
+
+.display__label:first-child {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.display__label:last-child {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.control {
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.control > .timing {
+    display: flex;
+    justify-content: start;
+}
+
+.control > .timing > .timing__section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    position: relative;
+}
+
+.timing__section--on::before {
+    content: "";
+    background-color: rgb(51, 221, 51);
+    background-image: radial-gradient(farthest-corner at 0.5px 0.5px, white, rgb(51, 221, 51) 20%);
+    box-shadow: 2px 2px 5px rgba(51, 221, 51, 0.63);
+    width: 5px;
+    height: 5px;
+    left: 0;
+    border-radius: 50%;
+    margin-right: 2.5px;
+}
+
+.timing__section--off::before {
+    content: "";
+    background-color: red;
+    background-image: radial-gradient(farthest-corner at 0.5px 0.5px, white, red 20%);
+    box-shadow: 2px 2px 5px rgba(255, 0, 0, 0.61);
+    width: 5px;
+    height: 5px;
+    left: 0;
+    border-radius: 50%;
+    margin-right: 2.5px;
+}
+
+.control > .timing > .timing__section > .timing__section__buttons {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+}
+
+.control button {
+    cursor: pointer;
+    outline: none;
+    border-radius: 20%;
+    border: none;
+    padding: 5px;
+    height: 30px;
+    width: 30px;
+    font-size: 1.25rem;
+    background-color: rgb(239, 239, 239);
+}
+
+.control button:hover{
+    background-color: rgb(216, 216, 216);
+}
+
+.control > .timing button {
+    margin: 2.5px 0;
+}
+
+.play-control button {
+    margin-left: 2.5px;
+}
