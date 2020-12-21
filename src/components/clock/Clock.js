@@ -86,14 +86,14 @@ export default function Clock() {
             
             <div className={style.control}>
                 <div className={style.timing}>
-                    <div className={`${style.timing__section} ${style[`timing__section--${timeMode === 'break' ? 'on' : 'off'}`]}`}>
+                    <div className={`${style.timing__section} ${style[`timing__section--${timeMode === 'break' && isPlaying ? 'on' : 'off'}`]}`}>
                         <div>break</div>
                         <div className={style.timing__section__buttons}>
                             <button onClick={increaseBreak}>+</button>
                             <button onClick={decreaseBreak}>-</button>
                         </div>
                     </div>
-                    <div className={`${style.timing__section} ${style[`timing__section--${timeMode === 'session' ? 'on' : 'off'}`]}`}>
+                    <div className={`${style.timing__section} ${style[`timing__section--${timeMode === 'session' && isPlaying ? 'on' : 'off'}`]}`}>
                         <div>session</div>
                         <div className={style.timing__section__buttons}>
                             <button onClick={increaseSession}>+</button>
