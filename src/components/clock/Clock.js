@@ -4,14 +4,20 @@ import style from './styles/clock.module.scss';
 
 import {mmss} from './utils/time';
 
+// Sounds
+import startSound from '../../assets/sounds/started.mp3';
+import completeSound from '../../assets/sounds/completed.mp3';
+
+
 export default function Clock() {
     const [sessionTime, setSessionTime] = useState(0);
     const [breakTime, setBreakTime] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [timer, setTimer] = useState(0);
+    const [timer, setTimer] = useState(0); // interval
+    const [switchDelay, setSwitchDelay] = useState(0); // timeout id - when transitioning between break and session. So when you stop in the middle of it there's you can call clearTimeout
     const [timeMode, setTimeMode] = useState('session');
 
-    const [currentTime, setCurrentTime] = useState(0);
+    const [currentTime, setCurrentTime] = useState(0); // seperate time from session/break time. One which actually gets reduced during timer.
     
     // TIMING
     const increaseSession = () => setSessionTime(time => time + 60000);
@@ -22,7 +28,10 @@ export default function Clock() {
 
     // PLAY CONTROL
     const play = (mode) => {
-        setIsPlaying(true);
+        setIsPlaying(status => {
+            if(!status && mode === 'session') (new Audio(startSound)).play(); // Play only when first hitting play
+            return true;
+        });
         setCurrentTime(time => {
             return time || (mode === 'session' ? sessionTime : breakTime);
         }); // if current session is not finished, continue; else, get session/break time
@@ -32,9 +41,21 @@ export default function Clock() {
                 if(time <= 0){
                     clearInterval(currentTimer);
                     if(mode === 'session'){
-                        startBreakTime();
+                        (new Audio(completeSound)).play();
+                        setSwitchDelay(
+                            setTimeout(() => {
+                                setTimeMode('break');
+                                play('break');
+                            }, 2000)
+                        );
                     }else{
-                        setTimeMode('session');
+                        (new Audio(startSound)).play();
+                        setSwitchDelay(
+                            setTimeout(() => {
+                                setTimeMode('session');
+                                play('session');
+                            }, 2000)
+                        );
                     }
                     return time
                 }
@@ -51,6 +72,7 @@ export default function Clock() {
     const reset = () => {
         clearInterval(timer);
         setIsPlaying(false);
+        setTimeMode('session');
         setCurrentTime(0);
         setSessionTime(1500000);
         setBreakTime(300000);
@@ -58,19 +80,15 @@ export default function Clock() {
 
     const stop = () => {
         clearInterval(timer);
+        clearTimeout(switchDelay);
         setIsPlaying(false);
+        setTimeMode('session');
         setCurrentTime(0);
-    }
-
-    const startBreakTime = () => {
-        setTimeout(() => {
-            setTimeMode('break');
-            play('break');
-        }, 2000)
     }
 
     return (
         <div className={style.clock}>
+            {/* <audio src="../../asse"></audio> */}
             <div className={style.display}>
                 {
                     isPlaying ? 

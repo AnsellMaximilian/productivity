@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300&display=swap');
+
+.task {
+    font-family: 'Kalam', cursive;
+    font-size: 1.25rem;
+    padding: 40px 10px 10px 10px;
+    margin: 20px auto;
+    width: 500px;
+    max-width: 100%;
+    min-height: 200px;
+    box-shadow: 5px 5px 5px gray;
+    background-color: rgb(252, 252, 80);
+    border-radius: 10px;
+    position: relative;
+}
+
+.task::before, .task::after {
+    content: "";
+    position: absolute;
+    background-color: red;
+    background-image: radial-gradient(rgb(255, 221, 221), red 40%);
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    border-radius: 50%;
+    box-shadow: 5px 5px 5px gray;
+}
+
+.task::before {
+    right: 10px;
+}
+
+.task::after {
+    left: 10px;
+}
+
+.list li {
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.list li:hover{
+    text-decoration: underline;
+}
+
+.list li::before {
+    content: "-";
+    margin-right: 5px;
+}
+
+.list li:hover::before {
+    content: ">";
+}
+
+.add {
+    display: block;
+    margin: 0 auto;
+    width: max-content;
+    cursor: pointer;
+}
+
+.add:hover {
+    transform: scale(1.1);
+}
+
+.add-input {
+    font-family: 'Kalam', cursive;
+    background-color: inherit;
+    border: none;
+    border-bottom: 1px solid black;
+    padding: 0;
+    margin: 10px 0;
+    height: 35px;
+    width: 100%;
+    outline: none;
+    resize: none;
+    font-size: 1.25rem;
+}
