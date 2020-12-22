@@ -11,9 +11,13 @@ import './styles/global.scss';
 
 const App = () => {
     return (
-        <div>
+        <div className="main">
             <Clock/>
             <Task />
+            <div className="author">
+                <h1>Designed and Created by <a href="https://github.com/AnsellMaximilian">Ansell Maximilian</a></h1>
+                <i className="fab fa-github"></i>
+            </div>
         </div>
     );
 }
